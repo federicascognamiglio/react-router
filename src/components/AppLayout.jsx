@@ -1,9 +1,12 @@
 import { Outlet } from "react-router-dom";
+import AppNavBar from "./AppNavBar";
 
 function AppLayout() {
     return (
         <>
-            <header>Header</header>
+            <header>
+                <AppNavBar />
+            </header>
 
             <Outlet />
 
