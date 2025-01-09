@@ -17,12 +17,12 @@ function AppNavBar() {
     ];
 
     return (
-        <nav className="navbar navbar-expand-lg py-3">
+        <nav className="navbar navbar-expand-lg">
             <div className="container-fluid">
-                <h3>JUST COOK</h3>
+                <NavLink to={pages[0].path} className="my-title fs-3 navbar-brand">JUST COOK</NavLink>
                 <ul className="navbar-nav">
                     {pages.map((curPage) => <li className="nav-item" key={curPage.name}>
-                        <NavLink to={curPage.path} className="nav-link">{curPage.name}</NavLink>
+                        <NavLink to={curPage.path} className="nav-link my-title">{curPage.name}</NavLink>
                     </li>)}
                 </ul>
             </div>
