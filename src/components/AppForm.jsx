@@ -1,4 +1,4 @@
-function AppForm({submitHandler, data, inputChangeHandler, availableTags, selectedChecks, multipleCheckboxHandler}) {
+function AppForm({submitHandler, data, inputChangeHandler, availableTags, selectedChecks, multipleCheckboxHandler, setDisplay}) {
     return (
         <form onSubmit={submitHandler} className='mt-4'>
             <div className="row">
@@ -30,7 +30,7 @@ function AppForm({submitHandler, data, inputChangeHandler, availableTags, select
             </div>
             {/* Form Button */}
             <div className="col-12">
-              <button type='submit' className="btn btn-primary mt-3">Save</button>
+              <button type='submit' className="btn my-btn mt-3">Save</button>
             </div>
           </form>
     )

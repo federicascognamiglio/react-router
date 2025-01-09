@@ -12,3 +12,8 @@
     background-color: #816d51;
     color: #ffffff;
 }
+
+.my-btn-outline {
+    border: 1px solid #816d51;
+    color: #816d51;
+}

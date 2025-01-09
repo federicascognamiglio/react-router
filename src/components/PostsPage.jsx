@@ -26,7 +26,9 @@ function PostsPage() {
     // Check Selezionati
     const [selectedChecks, setSelectedChecks] = useState([]);
     // Filter 
-    const [filter, setFilter] = useState("all")
+    const [filter, setFilter] = useState("all");
+    // Form Display
+    const [display, setDisplay] =useState("d-none");
 
     // USE EFFECTS
     // Show Posts
@@ -103,30 +105,37 @@ function PostsPage() {
         <>
             {/* Header */}
             <header>
-                <h1 className='text-center pt-4'>POSTS</h1>
+                <h1 className='text-center pt-4 my-title'>RECIPES</h1>
             </header>
             {/* Main */}
             <main className='container'>
                 {/* Form */}
                 <section className="pt-4">
-                    <h3>Add Post</h3>
-                    <AppForm
-                        submitHandler={handleSubmit}
-                        data={formData}
-                        inputChangeHandler={handleChange}
-                        availableTags={tagsList}
-                        selectedChecks={selectedChecks}
-                        multipleCheckboxHandler={handleMultipleCheckbox}
-                    />
+                    {/* <h3>Add Post</h3> */}
+                    <div className={display}>
+                        <AppForm
+                            submitHandler={handleSubmit}
+                            data={formData}
+                            inputChangeHandler={handleChange}
+                            availableTags={tagsList}
+                            selectedChecks={selectedChecks}
+                            multipleCheckboxHandler={handleMultipleCheckbox}
+                        />
+                    </div>
                 </section >
 
                 {/* Posts */}
                 <section className='mt-5' >
-                    <h3 className='pb-3'>My Posts</h3>
-                    <select onChange={(event) => setFilter(event.target.value)} value={filter} name="filter" id="filter" className='form-select w-25 mb-4'>
-                        <option value="all">All Posts</option>
-                        {tagsList.map((curTag, index) => <option key={index} value={curTag}>{curTag}</option>)}
-                    </select>
+                    <div className='d-flex justify-content-between mb-4'>
+                        <select onChange={(event) => setFilter(event.target.value)} value={filter} name="filter" id="filter" className='form-select w-25'>
+                            <option value="all">All Posts</option>
+                            {tagsList.map((curTag, index) => <option key={index} value={curTag}>{curTag}</option>)}
+                        </select>
+                        <div className='d-flex'>
+                        <button onClick={() => {setDisplay("d-none")}} className={`btn my-btn-outline me-3 ${display}`}>Close</button>
+                        <button onClick={() => {setDisplay("d-block")}} className='btn my-btn'>Add Recipe</button>
+                        </div>
+                    </div>
                     <div className="row">
                         {postsList.length !== 0 ? postsList.map((curPost, index) =>
                             <div key={index} className="col-4 mb-3">
