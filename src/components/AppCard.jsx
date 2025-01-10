@@ -1,4 +1,6 @@
-function AppCard({url, post, deleteHandler}) {
+import { Link } from "react-router-dom";
+
+function AppCard({ url, post, deleteHandler }) {
     return (
         <div className="card">
             <img src={`${url}/${post.img}`} alt="Placeholder image" />
@@ -8,7 +10,10 @@ function AppCard({url, post, deleteHandler}) {
                 <div>
                     {post.tags.map((curTag, index) => <span key={index} className='badge text-bg-dark me-2 mb-4'>{curTag}</span>)}
                 </div>
-                <button onClick={() => deleteHandler(post.id)} className='btn btn-outline-danger'>Delete</button>
+                <div>
+                    <button onClick={() => deleteHandler(post.id)} className='btn btn-outline-danger me-3'>Delete</button>
+                    <Link to={`/posts/${post.id}`} className="btn my-btn">Details</Link>
+                </div>
             </div>
         </div>
     )
