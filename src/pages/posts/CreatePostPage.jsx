@@ -41,7 +41,7 @@ function CreatePostPage() {
         event.preventDefault()
 
         axios.post(`${apiUrl}/posts`, formData).then((resp) => {
-            navigate("/posts/:id")
+            navigate(`/posts/${resp.data.newPost.id}`)
         })
     }
 
