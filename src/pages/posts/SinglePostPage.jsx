@@ -13,8 +13,10 @@ function SinglePostPage() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get(`${apiUrl}/posts/${id}`).then((resp) => { setPost(resp.data) })
-    })
+        axios.get(`${apiUrl}/posts/${id}`)
+        .then((resp) => { setPost(resp.data) })
+        .catch((err) => {err.status === 404 && (navigate("/not-found"))})
+    }, [id])
 
     return (
         <section className="container d-flex justify-content-center pt-5">
@@ -28,7 +30,10 @@ function SinglePostPage() {
                         <div>
                             {post.tags.map((curTag, index) => <span key={index} className="badge text-bg-dark me-2 mb-4">{curTag}</span>)}
                         </div>
-                        <a onClick={() => navigate(-1)} className="btn my-btn">Back</a>
+                        <div>
+                        <a onClick={() => navigate(-1)} className="btn my-btn-outline me-3">Back</a>
+                        <Link className="btn my-btn" to="/posts">Recipes</Link>
+                        </div>
                     </div>
                 </div>
                 <div className="d-flex align-items-center justify-content-between position-absolute top-50 start-50 translate-middle w-75">

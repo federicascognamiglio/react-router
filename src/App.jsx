@@ -20,8 +20,8 @@ function App() {
             <Route path="create" element={<CreatePostPage />} />
             <Route path=":id" element={<SinglePostPage />} />
           </Route>
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
-        <Route path="*" element={<NotFoundPage />}/>
       </Routes>
     </BrowserRouter>
   )

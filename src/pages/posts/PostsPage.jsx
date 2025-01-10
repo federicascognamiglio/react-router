@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 // Components
 import AppCard from '../../components/AppCard';
 
@@ -8,6 +8,7 @@ import AppCard from '../../components/AppCard';
 const apiUrl = import.meta.env.VITE_API_URL;
 
 function PostsPage() {
+    const navigate = useNavigate();
     // VARIABILI DI STATO
     // Lista Post
     const [postsList, setPostsList] = useState([]);
@@ -31,16 +32,20 @@ function PostsPage() {
             url += `?tag=${filter}`;
         }
 
-        axios.get(url).then((resp) => {
+        axios.get(url)
+        .then((resp) => {
             setPostsList(resp.data)
         })
+        .catch((err) => {err.status === 404 && navigate("/not-found")})
     }
 
     // Get Tags
     const getTags = () => {
-        axios.get(`${apiUrl}/tags`).then((resp) => {
+        axios.get(`${apiUrl}/tags`)
+        .then((resp) => {
             setTagsList(resp.data.tags)
         })
+        .catch((err) => {err.status === 404 && navigate("/not-found")})
     }
 
     // Delete Function
