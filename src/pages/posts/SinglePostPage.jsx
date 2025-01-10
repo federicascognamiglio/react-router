@@ -19,6 +19,7 @@ function SinglePostPage() {
     return (
         <section className="container d-flex justify-content-center pt-5">
             {post && (
+                <>
                 <div className="card w-50 mt-4">
                     <img src={`${apiUrl}/${post.img}`} alt="" />
                     <div className="card-body">
@@ -30,6 +31,11 @@ function SinglePostPage() {
                         <a onClick={() => navigate(-1)} className="btn my-btn">Back</a>
                     </div>
                 </div>
+                <div className="d-flex align-items-center justify-content-between position-absolute top-50 start-50 translate-middle w-75">
+                    <Link to={`/posts/${post.id -1}`} className="btn my-btn">&lt;</Link>
+                    <Link to={`/posts/${post.id +1}`} className="btn my-btn">&gt;</Link>
+                </div>
+                </>
             )}
         </section>
     )

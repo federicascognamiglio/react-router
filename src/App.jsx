@@ -6,6 +6,7 @@ import AboutPage from "./pages/AboutPage"
 import PostsPage from "./pages/posts/PostsPage"
 import CreatePostPage from "./pages/posts/CreatePostPage"
 import SinglePostPage from "./pages/posts/SinglePostPage"
+import NotFoundPage from "./pages/NotFoundPage"
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route path=":id" element={<SinglePostPage />} />
           </Route>
         </Route>
+        <Route path="*" element={<NotFoundPage />}/>
       </Routes>
     </BrowserRouter>
   )
