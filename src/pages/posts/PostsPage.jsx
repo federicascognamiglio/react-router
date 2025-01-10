@@ -1,16 +1,8 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 // Components
-import AppForm from '../../components/AppForm';
 import AppCard from '../../components/AppCard';
-
-// Valori di partenza Form
-const initialFormData = {
-    title: "",
-    content: "",
-    img: "",
-    tags: []
-};
 
 // API Url
 const apiUrl = import.meta.env.VITE_API_URL;
@@ -19,16 +11,10 @@ function PostsPage() {
     // VARIABILI DI STATO
     // Lista Post
     const [postsList, setPostsList] = useState([]);
-    // Valori per form
-    const [formData, setFormData] = useState(initialFormData);
     // Tags
     const [tagsList, setTagsList] = useState([])
-    // Check Selezionati
-    const [selectedChecks, setSelectedChecks] = useState([]);
     // Filter 
     const [filter, setFilter] = useState("all");
-    // Form Display
-    const [display, setDisplay] =useState("d-none");
 
     // USE EFFECTS
     // Show Posts
@@ -57,42 +43,6 @@ function PostsPage() {
         })
     }
 
-    // Submit Handler Function
-    const handleSubmit = (event) => {
-        event.preventDefault()
-
-        axios.post(`${apiUrl}/posts`, formData).then((resp) => {
-            const newPostsList = resp.data;
-            setPostsList(newPostsList);
-            setFormData(initialFormData)
-        })
-    }
-
-    // Multiple Checkboxes Handler Function
-    const handleMultipleCheckbox = (event) => {
-        const value = event.target.value;
-        const isChecked = event.target.checked;
-
-        const updatedChecks = isChecked ? [...selectedChecks, value] : selectedChecks.filter((curValue) => curValue !== value);
-        setSelectedChecks(updatedChecks);
-
-        setFormData({
-            ...formData,
-            tags: updatedChecks,
-        });
-    }
-
-    // Input Change Handler Function
-    const handleChange = (event) => {
-        const keyToChange = event.target.name;
-        const newValue = event.target.value;
-        const newData = {
-            ...formData,
-            [keyToChange]: newValue
-        }
-        setFormData(newData)
-    }
-
     // Delete Function
     const handleDelete = (idToDelete) => {
         axios.delete(`${apiUrl}/posts/${idToDelete}`).then((resp) => {
@@ -109,21 +59,6 @@ function PostsPage() {
             </header>
             {/* Main */}
             <main className='container'>
-                {/* Form */}
-                <section className="pt-4">
-                    {/* <h3>Add Post</h3> */}
-                    <div className={display}>
-                        <AppForm
-                            submitHandler={handleSubmit}
-                            data={formData}
-                            inputChangeHandler={handleChange}
-                            availableTags={tagsList}
-                            selectedChecks={selectedChecks}
-                            multipleCheckboxHandler={handleMultipleCheckbox}
-                        />
-                    </div>
-                </section >
-
                 {/* Posts */}
                 <section className='mt-5' >
                     <div className='d-flex justify-content-between mb-4'>
@@ -132,8 +67,7 @@ function PostsPage() {
                             {tagsList.map((curTag, index) => <option key={index} value={curTag}>{curTag}</option>)}
                         </select>
                         <div className='d-flex'>
-                        <button onClick={() => {setDisplay("d-none")}} className={`btn my-btn-outline me-3 ${display}`}>Close</button>
-                        <button onClick={() => {setDisplay("d-block")}} className='btn my-btn'>Add Recipe</button>
+                        <Link className='btn my-btn' to="/posts/create">Add Recipe</Link>
                         </div>
                     </div>
                     <div className="row">
