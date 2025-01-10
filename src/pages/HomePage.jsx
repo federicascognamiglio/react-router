@@ -1,6 +1,3 @@
-import { NavLink } from "react-router-dom"
-import PostsPage from "./PostsPage"
-
 function HomePage() {
     return (
         <main className="my-home-bg vh-100">

@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios';
 // Components
-import AppForm from './AppForm';
-import AppCard from './AppCard';
+import AppForm from '../../components/AppForm';
+import AppCard from '../../components/AppCard';
 
 // Valori di partenza Form
 const initialFormData = {
